@@ -24,7 +24,10 @@ const TodoList = () => {
 const styles = StyleSheet.create({
     container: {
         width: `${100}%`,
-        height: `${38}%`,
+        height: `${25}%`,
+        backgroundColor: 'whitesmoke',
+        marginTop: 10,
+        marginBottom: 5,
         // backgroundColor: 'skyblue',
         // backgroundColor: 'aliceblue',
         overflow: 'hidden',

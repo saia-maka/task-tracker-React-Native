@@ -27,6 +27,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import TodoList from './components/UI/TodoList';
+import TodoListUpgraded from './components/UI/TodoListUpgraded';
 
 const Section = ({ children, title, ui }): Node => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -91,7 +92,7 @@ const App: () => Node = () => {
           <Section title="Displayed todo tasks upgraded">
             Tasks can be edited or deleted. Click the <Text style={styles.highlight}>Edit</Text> or <Text style={styles.highlight}>Delete</Text> buttons to test these features.
           </Section>
-
+          <TodoListUpgraded />
           {/* SECTION 3  */}
 
 
