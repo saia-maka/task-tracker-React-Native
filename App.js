@@ -29,6 +29,7 @@ import {
 import TodoList from './components/UI/TodoList';
 import TodoListAddition from './components/UI/TodoListAddition';
 import TodoListUpgraded from './components/UI/TodoListUpgraded';
+import TaskList from './components/UI/TaskList';
 
 const Section = ({ children, title, ui }): Node => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -96,12 +97,25 @@ const App: () => Node = () => {
           <TodoListAddition />
           {/* SECTION 3 */}
 
-          {/* SECTION 3  */}
+          {/* SECTION 4  */}
           <Section title="Displayed todo tasks upgraded">
             Tasks can be edited or deleted. Click the <Text style={styles.highlight}>Edit</Text> or <Text style={styles.highlight}>Delete</Text> buttons to test these features.
           </Section>
           <TodoListUpgraded />
-          {/* SECTION 3  */}
+          {/* SECTION 4  */}
+
+          {/* SECTION 5 */}
+          <Section title="Task Tracker App">
+            In this final version <Text style={styles.highlight}>users can track all their tasks and progress.</Text>
+          </Section>
+          <TaskList />
+          {/* SECTION 5 */}
+
+          {/* NOTES SECTION */}
+          <Section title="Developers Notes">
+            
+          </Section>
+          {/* NOTES SECTION */}
 
 
           {/* <Section title="Debug">
