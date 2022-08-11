@@ -27,6 +27,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import TodoList from './components/UI/TodoList';
+import TodoListAddition from './components/UI/TodoListAddition';
 import TodoListUpgraded from './components/UI/TodoListUpgraded';
 
 const Section = ({ children, title, ui }): Node => {
@@ -87,6 +88,13 @@ const App: () => Node = () => {
           </Section>
           <TodoList />
           {/* SECTION 2  */}
+
+          {/* SECTION 3 */}
+          <Section title="Adding new todo tasks">
+            New tasks can be added.
+          </Section>
+          <TodoListAddition />
+          {/* SECTION 3 */}
 
           {/* SECTION 3  */}
           <Section title="Displayed todo tasks upgraded">
