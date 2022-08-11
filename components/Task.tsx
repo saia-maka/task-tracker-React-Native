@@ -11,14 +11,17 @@ import {
     View,
 } from 'react-native';
 import { Button } from "@rneui/themed";
+import SelectDropdown from 'react-native-select-dropdown'
 
 
-const Task = ({ children, editTask, deleteTask, currentlyEditing, editId, data, updateData, resetEdit }) => {
-const [task, setTask] = useState('')
+
+
+const Task = ({ children, editTask, deleteTask, currentlyEditing, editId, data, updateData, resetEdit, updateState }) => {
+    const [task, setTask] = useState('')
 
     const updateTask = () => {
         const update = data.map((taskData) => {
-            return taskData.id === editId ? {...taskData, name: task} : taskData
+            return taskData.id === editId ? { ...taskData, name: task } : taskData
         })
         resetEdit(false)
         setTask('')
@@ -26,15 +29,39 @@ const [task, setTask] = useState('')
     }
 
     const EditForm = <View style={styles.formView}>
-            <TextInput style={styles.textInput} value={task} onChangeText={setTask} placeholder='Edit task name'/>
-            <Button style={styles.updateButton} onPress={updateTask}>Update</Button>
-        </View>
+        <TextInput style={styles.textInput} value={task} onChangeText={setTask} placeholder='Edit task name' />
+        <Button style={styles.updateButton} onPress={updateTask}>Update</Button>
+    </View>
+
+    const options = ['Done', 'In-progress', 'To-do']
+    const dropdownText = () => 'Update state'
+    const stateForm = <View style={styles.stateButtons}>
+        <SelectDropdown
+            defaultButtonText='Update state'
+            buttonStyle={{ borderWidth: 1 }}
+            data={options}
+            onSelect={(selectedItem, index) => {
+                updateState(selectedItem, editId)
+            }}
+            buttonTextAfterSelection={(selectedItem, index) => {
+                // text represented after item is selected
+                // if data array is an array of objects then return selectedItem.property to render after item is selected
+                return 'Update state'
+            }}
+            rowTextForSelection={(item, index) => {
+                // text represented for each item in dropdown
+                // if data array is an array of objects then return item.property to represent item in dropdown
+                return item
+            }}
+        />
+    </View>
 
     return <SafeAreaView>
         <ScrollView>
             <Text style={styles.text}>
                 {children}
             </Text>
+            {stateForm}
             <View style={styles.buttonContainer}>
                 <Button style={styles.button} onPress={editTask}>
                     Edit
@@ -42,7 +69,7 @@ const [task, setTask] = useState('')
                 <Button style={styles.button} onPress={deleteTask}>
                     Delete
                 </Button>
-            {currentlyEditing === editId ? EditForm : ''}
+                {currentlyEditing === editId ? EditForm : ''}
             </View>
         </ScrollView>
     </SafeAreaView>
@@ -67,11 +94,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'black',
-        borderRadius: 6
+        borderRadius: 3
     },
     buttonContainer: {
         width: `${100}%`,
-        height: 'auto',
+        height: 100,
         display: 'flex',
         flexDirection: 'row',
         marginLeft: 5
@@ -93,12 +120,19 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'black',
-        borderRadius: 6,
+        borderRadius: 3,
     },
     updateButton: {
         width: `${50}%`,
         height: `${70}%`,
         marginTop: 2,
+    },
+    stateButtons: {
+        width: `${95}%`,
+        display: 'flex',
+        alignSelf: 'center',
+        alignItems: 'flex-end',
+        height: 60
     }
 })
 

@@ -33,10 +33,17 @@ const TaskList = () => {
             id: (tasksData.length) + 1,
             editId: (tasksData.length) + 1,
             name: newTask,
-            state: 'todo'
+            state: 'To-do'
         }
         setTasksData([...tasksData, newTodo])
         setNewTask('')
+    }
+
+    const updateTaskState = (newState, id) => {
+        const updatedTodos = tasksData.map((task) => {
+            return task.id === id ? {...task, state: newState} : {...task}
+        })
+        return setTasksData(updatedTodos)
     }
 
     const addTaskForm = <View style={styles.buttonContainer}>
@@ -58,6 +65,8 @@ const TaskList = () => {
         return setTasksData(updatedTasksData)
     }
 
+
+
     const todolist = filteredData.map((task) => <Task
         key={task.id}
         deleteTask={(event) => deleteHandler(event, task.id)}
@@ -66,30 +75,37 @@ const TaskList = () => {
         editId={task.id}
         data={tasksData}
         updateData={updateTask}
-        resetEdit={setClickedEdit}>
-        {task.name}
+        resetEdit={setClickedEdit}
+        updateState={updateTaskState}>
+        {`${task.name}   -`} {
+            <Text style={task.state === 'Done' ? { color: 'green' } :
+                task.state === 'To-do' ? { color: 'red' } :
+                    task.state === 'In-progress' ? { color: 'orange' } :
+                        { color: 'black' }}>
+                {`   ${task.state}`}
+            </Text>
+        }
     </Task>)
 
     const options = ['All', 'To-do', 'In-progress', 'Done']
     const taskMenu = <View style={styles.menuContainer}>
         {/* <SelectDropdown data={options}/> */}
         <SelectDropdown
+            buttonStyle={{ borderWidth: 1 }}
+            defaultButtonText='All Tasks'
             data={options}
             onSelect={(selectedItem, index) => {
                 // console.log(selectedItem, index)
-                console.log(selectedItem, '>>>>>>>>')
                 setFilter(selectedItem)
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
                 // text represented after item is selected
                 // if data array is an array of objects then return selectedItem.property to render after item is selected
-                console.log(selectedItem)
                 return selectedItem
             }}
             rowTextForSelection={(item, index) => {
                 // text represented for each item in dropdown
                 // if data array is an array of objects then return item.property to represent item in dropdown
-                console.log(item)
                 return item
             }}
         />
@@ -107,7 +123,7 @@ const TaskList = () => {
 const styles = StyleSheet.create({
     container: {
         width: `${100}%`,
-        height: 350,
+        height: 500,
         marginTop: 10,
         marginBottom: 5,
         backgroundColor: 'whitesmoke',
@@ -136,14 +152,17 @@ const styles = StyleSheet.create({
         margin: 0,
         width: `${30}%`,
         height: 80,
+        marginTop: 30
     },
     menuContainer: {
-        backgroundColor: 'dodgerblue',
-        width: `${100}%`,
-        height: 80,
+        // backgroundColor: 'dodgerblue',
+        width: `${95}%`,
+        height: 90,
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+        alignSelf: 'center',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        marginBottom: 30
     },
 })
 

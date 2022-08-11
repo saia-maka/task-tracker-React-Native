@@ -111,6 +111,12 @@ const App: () => Node = () => {
           <TaskList />
           {/* SECTION 5 */}
 
+          {/* NOTES SECTION */}
+          <Section title="Developers Notes">
+            
+          </Section>
+          {/* NOTES SECTION */}
+
 
           {/* <Section title="Debug">
             <DebugInstructions />
