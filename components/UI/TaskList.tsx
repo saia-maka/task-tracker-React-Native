@@ -89,13 +89,11 @@ const TaskList = () => {
 
     const options = ['All', 'To-do', 'In-progress', 'Done']
     const taskMenu = <View style={styles.menuContainer}>
-        {/* <SelectDropdown data={options}/> */}
         <SelectDropdown
             buttonStyle={{ borderWidth: 1 }}
             defaultButtonText='All Tasks'
             data={options}
             onSelect={(selectedItem, index) => {
-                // console.log(selectedItem, index)
                 setFilter(selectedItem)
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
@@ -132,37 +130,33 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         width: `${100}%`,
-        height: `${11}%`,
+        height: 135,
         display: `flex`,
         flexDirection: 'column',
         alignItems: `center`,
-        justifyContent: `space-evenly`,
-        // borderWidth: 1
+        justifyContent: `space-between`,
     },
     textInput: {
         width: `${95}%`,
         height: 40,
-        margin: 0,
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'black',
-        borderRadius: 6,
+        borderRadius: 2,
     },
     button: {
-        margin: 0,
         width: `${30}%`,
         height: 80,
-        marginTop: 30
     },
     menuContainer: {
         // backgroundColor: 'dodgerblue',
         width: `${95}%`,
-        height: 90,
+        height: `auto`,
         display: 'flex',
         alignSelf: 'center',
         alignItems: 'flex-start',
         justifyContent: 'center',
-        marginBottom: 30
+        marginBottom: 10
     },
 })
 
