@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         padding: 10,
-        margin: 10,
+        margin: 12,
         textTransform: 'capitalize',
         width: 'auto',
         borderWidth: 1,
