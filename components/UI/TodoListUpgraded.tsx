@@ -42,7 +42,6 @@ const TodoListUpgraded = () => {
     const deleteHandler = (event, taskId) => setTasksData(tasksData.filter((task) => task.id !== taskId));
 
     const editHandler = (event, task) => {
-        console.log(task.id === task.editId, task.id, task.editId)
         setClickedEdit(!clickedEdit)
         return task.id === task.editId && !clickedEdit ? setIsEditingTask(task.id) : setIsEditingTask(0)
     }
@@ -75,7 +74,7 @@ const TodoListUpgraded = () => {
 const styles = StyleSheet.create({
     container: {
         width: `${100}%`,
-        height: `${25}%`,
+        height: 350,
         marginTop: 10,
         marginBottom: 5,
         backgroundColor: 'whitesmoke',
