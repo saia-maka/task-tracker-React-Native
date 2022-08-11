@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { tasks } from '../../data/tasks'
-import TodoItemUpgraded from '../TodoItemUpgraded';
+import TodoItem from '../TodoItem';
 import {
     SafeAreaView,
     ScrollView,
@@ -14,12 +14,8 @@ import {
 import { Button } from "@rneui/themed";
 
 
-
-const TodoListUpgraded = () => {
-    const [tasksData, setTasksData] = useState(tasks);
-    const [isEditingTask, setIsEditingTask] = useState(0);
-    const [clickedEdit, setClickedEdit] = useState(false);
-
+const TodoListAddition = () => {
+    const [tasksData, setTasksData] = useState(tasks)
     const [newTask, setNewTask] = useState('')
 
     const addNewTask = () => {
@@ -39,30 +35,7 @@ const TodoListUpgraded = () => {
         </Button>
     </View>
 
-    const deleteHandler = (event, taskId) => setTasksData(tasksData.filter((task) => task.id !== taskId));
-
-    const editHandler = (event, task) => {
-        console.log(task.id === task.editId, task.id, task.editId)
-        setClickedEdit(!clickedEdit)
-        return task.id === task.editId && !clickedEdit ? setIsEditingTask(task.id) : setIsEditingTask(0)
-    }
-
-    const updateTask = (updatedTasksData) => {
-        setIsEditingTask(0)
-        return setTasksData(updatedTasksData)
-    }
-
-    const todolist = tasksData.map((task) => <TodoItemUpgraded
-        key={task.id}
-        deleteTask={(event) => deleteHandler(event, task.id)}
-        editTask={(event) => editHandler(event, task)}
-        currentlyEditing={isEditingTask}
-        editId={task.id}
-        data={tasksData}
-        updateData={updateTask}
-        resetEdit={setClickedEdit}>
-        {task.name}
-    </TodoItemUpgraded>)
+    const todolist = tasksData.map((task) => <TodoItem key={task.id}>{task.name}</TodoItem>)
 
     return <SafeAreaView>
         <ScrollView style={styles.container}>
@@ -76,37 +49,32 @@ const styles = StyleSheet.create({
     container: {
         width: `${100}%`,
         height: `${25}%`,
+        backgroundColor: 'whitesmoke',
         marginTop: 10,
         marginBottom: 5,
-        backgroundColor: 'whitesmoke',
         overflow: 'hidden',
         overflowX: 'scroll'
     },
     buttonContainer: {
         width: `${100}%`,
-        height: `${11}%`,
+        height: `${18}%`,
         display: `flex`,
         flexDirection: 'column',
         alignItems: `center`,
-        justifyContent: `space-evenly`,
-        // borderWidth: 1
+        justifyContent: `space-between`,
     },
     textInput: {
         width: `${95}%`,
         height: 40,
-        margin: 0,
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'black',
         borderRadius: 6,
     },
     button: {
-        margin: 0,
         width: `${30}%`,
         height: 80,
     },
 })
 
-
-
-export default TodoListUpgraded;
+export default TodoListAddition;
